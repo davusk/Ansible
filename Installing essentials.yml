@@ -1,0 +1,25 @@
+---
+-
+  name: Installing essential tools to VMs
+  hosts: all
+  become: yes
+  tasks:
+    -
+      name: Installing bind-utils to RHEL
+      yum:
+        name: "bind-utils"
+        state: "latest"
+      when: ansible_os_family == "RedHat"
+    -
+      name: Installing open-vm-tools to RHEL
+      yum:
+        name: "open-vm-tools"
+        state: latest
+      when: ansible_os_family == "RedHat"
+
+    -
+      name: Installing open-vm-tools to Debian
+      apt:
+        name: "open-vm-tools"
+        state: latest
+      when: ansible_os_family == "Debian"
